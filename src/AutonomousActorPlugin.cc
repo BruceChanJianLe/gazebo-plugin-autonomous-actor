@@ -176,7 +176,7 @@ void AutoActorPlugin::OnUpdate(const common::UpdateInfo &_info)
   double distance = pos.Length();
   
   // Added by brucechanjianle
-  #ifdef
+  #ifdef DEBUG_
     // For debug
     // gzdbg << distance << std::endl;
   #endif
