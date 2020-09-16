@@ -78,6 +78,13 @@ void AutoActorPlugin::Load(physics::ModelPtr _model, sdf::ElementPtr _sdf)
     }
   }
 
+  // Added by brucechanjianle
+  // Read in target tolerance
+  if (_sdf->HasElement("target_tolerance"))
+    this->tolerance = _sdf->Get<double>("target_tolerance");
+  else
+    this->tolerance = 1.5;
+
 }
 
 /////////////////////////////////////////////////
@@ -164,7 +171,7 @@ void AutoActorPlugin::OnUpdate(const common::UpdateInfo &_info)
 
   // Choose a new target position if the actor has reached its current
   // target.
-  if (distance < 1.5)
+  if (distance < this->tolerance)
   {
     this->ChooseNewTarget();
     pos = this->target - pose.Pos();

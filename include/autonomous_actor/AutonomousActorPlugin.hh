@@ -58,6 +58,9 @@ namespace gazebo
     private: std::vector<ignition::math::Vector3d> targets;
     private: int idx;
 
+    /// \brief Target Tolerance
+    private: double tolerance;
+
     /// \brief Target location weight (used for vector field)
     private: double targetWeight = 1.0;
 
