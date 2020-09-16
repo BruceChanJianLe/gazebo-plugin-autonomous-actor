@@ -63,7 +63,7 @@ AUTONOMOUS ACTOR PLUGIN
 
 ## Models
 
-The models folder is obtained from 
+The models folder is obtained from [servicesim_competition](https://github.com/osrf/servicesim/tree/master/servicesim_competition)
 
 ## More about Gazebo plugin
 
@@ -71,5 +71,6 @@ The models folder is obtained from
 
 ## Reference
 
+- Reference plugin repo [link1](https://github.com/osrf/gazebo/tree/gazebo9/plugins)
 - Gazebo debug msg [link1](https://answers.gazebosim.org//question/17428/how-print-the-output-of-a-plugin/)
 - Gazebo dependencies [link1](http://gazebosim.org/tutorials?tut=install_dependencies_from_source)
