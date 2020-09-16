@@ -4,7 +4,7 @@
   <name>gazebo-plugin-autonomous-actor</name>
   <version>0.0.0</version>
   <description>
-    The autonomous actor plugin allows user to specify a few location with respect to the world frame and loop these location by visiting them randomly
+    The autonomous actor plugin allows user to specify a few location with respect to the world frame and loop these location by visiting them autonomously.
   </description>
   <maintainer email="jianle001@e.ntu.edu.sg">Bruce Chan Jian Le</maintainer>
   <author email="jianle001@e.ntu.edu.sg">Bruce Chan Jian Le</author>
