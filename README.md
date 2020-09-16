@@ -14,6 +14,42 @@ cd ..
 catkin_make
 ```
 
+## Usage
+
+Add your plugin in your sdf world file.  
+
+```xml
+<actor name="actor0">
+    <pose>0 0 0 0 0 0</pose>
+    <skin>
+    <filename>walk.dae</filename>
+    <scale>1.0</scale>
+    </skin>
+    <animation name="walking">
+    <filename>walk.dae</filename>
+    <scale>1.000000</scale>
+    <interpolate_x>true</interpolate_x>
+    </animation>
+
+    <plugin name="actor0_plugin" filename="libAutonomousActorPlugin.so">
+    <target_weight>1.15</target_weight>
+    <obstacle_weight>1.8</obstacle_weight>
+    <animation_factor>5.1</animation_factor>
+    <!-- Usage: Modify the set of models that the vector field should
+            ignore when moving the actor -->
+    <ignore_obstacles>
+        <model>cafe</model>
+        <model>ground_plane</model>
+    </ignore_obstacles>
+    <targets>
+        <target>0 -5 0</target>
+        <target>0 0 0</target>
+        <target>-3 -4 0</target>
+    </targets>
+    </plugin>
+</actor>
+```
+
 ## Parameters
 
 ACTOR  
