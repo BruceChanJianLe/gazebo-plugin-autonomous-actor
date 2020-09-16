@@ -2,6 +2,18 @@
 
 This repository is Gazebo plugin for actor to navigation in simulation environment autonomously.  
 
+## Installation
+
+This code may be treated as a ROS package. Therefore, it can be built with `catkin_make` or `catkin build`.
+
+```bash
+mkdir -p catkin_ws/src
+cd catkin/src
+git clone https://github.com/BruceChanJianLe/gazebo-plugin-autonomous-actor.git
+cd ..
+catkin_make
+```
+
 ## Parameters
 
 ACTOR  
