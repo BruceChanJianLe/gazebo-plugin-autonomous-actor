@@ -116,18 +116,24 @@ void AutoActorPlugin::ChooseNewTarget()
 {
   // Added by brucechanjianle
   // Increase index number in sequence
-  // For debug
-  // gzdbg << "index:" << this->idx << "\t" << "target_size:" << this->targets.size() << (this->idx < this->targets.size()) << std::endl;
+  #ifdef DEBUG_
+    // For debug
+    gzdbg << "index:" << this->idx << "\t" << "target_size:" << this->targets.size() << (this->idx < this->targets.size()) << std::endl;
+  #endif
   this->idx++;
   if(!(this->idx < this->targets.size()))
   {
-    // For debug
-    // gzdbg << "Zero statement!" << std::endl;
+    #ifdef DEBUG_
+      // For debug
+      gzdbg << "Zero statement!" << std::endl;
+    #endif
     this->idx = 0;
   }
   
-  // For debug
-  // gzdbg << "current index:" << this->idx << std::endl;
+  #ifdef DEBUG_
+    // For debug
+    gzdbg << "current index:" << this->idx << std::endl;
+  #endif
 
   // Set next target
   this->target = this->targets.at(this->idx);
@@ -170,8 +176,10 @@ void AutoActorPlugin::OnUpdate(const common::UpdateInfo &_info)
   double distance = pos.Length();
   
   // Added by brucechanjianle
-  // For debug purposes
-  // gzdbg << distance << std::endl;
+  #ifdef
+    // For debug
+    // gzdbg << distance << std::endl;
+  #endif
 
   // Choose a new target position if the actor has reached its current
   // target.
