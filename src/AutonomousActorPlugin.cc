@@ -86,11 +86,7 @@ void AutoActorPlugin::Reset()
   this->velocity = 0.8;
   this->lastUpdate = 0;
 
-  // if (this->sdf && this->sdf->HasElement("target"))
-  //   this->target = this->sdf->Get<ignition::math::Vector3d>("target");
-  // else
-    // this->target = ignition::math::Vector3d(0, -5, 1.2138);
-  this->target = this->targets.at(0);
+  this->target = this->targets.at(this->idx);
 
   auto skelAnims = this->actor->SkeletonAnimations();
   if (skelAnims.find(WALKING_ANIMATION) == skelAnims.end())
@@ -111,25 +107,6 @@ void AutoActorPlugin::Reset()
 /////////////////////////////////////////////////
 void AutoActorPlugin::ChooseNewTarget()
 {
-  // ignition::math::Vector3d newTarget(this->target);
-  // while ((newTarget - this->target).Length() < 2.0)
-  // {
-  //   newTarget.X(ignition::math::Rand::DblUniform(-3, 3.5));
-  //   newTarget.Y(ignition::math::Rand::DblUniform(-10, 2));
-
-  //   for (unsigned int i = 0; i < this->world->ModelCount(); ++i)
-  //   {
-  //     double dist = (this->world->ModelByIndex(i)->WorldPose().Pos()
-  //         - newTarget).Length();
-  //     if (dist < 2.0)
-  //     {
-  //       newTarget = this->target;
-  //       break;
-  //     }
-  //   }
-  // }
-  // this->target = newTarget;
-
   // Added by brucechanjianle
   // Increase index number in sequence
   if(this->idx < this->targets.size())
@@ -181,7 +158,9 @@ void AutoActorPlugin::OnUpdate(const common::UpdateInfo &_info)
 
   double distance = pos.Length();
   
-  gzmsg << distance << std::endl;
+  // Added by brucechanjianle
+  // For debug purposes
+  gzdbg << distance << std::endl;
 
   // Choose a new target position if the actor has reached its current
   // target.
