@@ -25,6 +25,24 @@ void AutoActorPlugin::Load(physics::ModelPtr _model, sdf::ElementPtr _sdf)
   this->connections.push_back(event::Events::ConnectWorldUpdateBegin(
           std::bind(&AutoActorPlugin::OnUpdate, this, std::placeholders::_1)));
 
+  // Added by brucechanjianle
+  // Read in multiple targets
+  if (_sdf->HasElement("targets"))
+  {
+    // Obtain targets with element pointer
+    sdf::ElementPtr local_targets = _sdf->GetElement("targets")->GetElement("target");
+
+    // Extract target
+    while(local_targets)
+    {
+      this->targets.push_back(local_targets->Get<ignition::math::Vector3d>());
+      local_targets = local_targets->GetNextElement("target");
+    }
+
+    // Set index to zero
+    this->idx = 0;
+  }
+
   this->Reset();
 
   // Read in the target weight
@@ -60,8 +78,6 @@ void AutoActorPlugin::Load(physics::ModelPtr _model, sdf::ElementPtr _sdf)
     }
   }
 
-  // Added by brucechanjianle
-  // Read in multiple targets
 }
 
 /////////////////////////////////////////////////
@@ -70,10 +86,11 @@ void AutoActorPlugin::Reset()
   this->velocity = 0.8;
   this->lastUpdate = 0;
 
-  if (this->sdf && this->sdf->HasElement("target"))
-    this->target = this->sdf->Get<ignition::math::Vector3d>("target");
-  else
-    this->target = ignition::math::Vector3d(0, -5, 1.2138);
+  // if (this->sdf && this->sdf->HasElement("target"))
+  //   this->target = this->sdf->Get<ignition::math::Vector3d>("target");
+  // else
+    // this->target = ignition::math::Vector3d(0, -5, 1.2138);
+  this->target = this->targets.at(0);
 
   auto skelAnims = this->actor->SkeletonAnimations();
   if (skelAnims.find(WALKING_ANIMATION) == skelAnims.end())
@@ -94,24 +111,39 @@ void AutoActorPlugin::Reset()
 /////////////////////////////////////////////////
 void AutoActorPlugin::ChooseNewTarget()
 {
-  ignition::math::Vector3d newTarget(this->target);
-  while ((newTarget - this->target).Length() < 2.0)
-  {
-    newTarget.X(ignition::math::Rand::DblUniform(-3, 3.5));
-    newTarget.Y(ignition::math::Rand::DblUniform(-10, 2));
+  // ignition::math::Vector3d newTarget(this->target);
+  // while ((newTarget - this->target).Length() < 2.0)
+  // {
+  //   newTarget.X(ignition::math::Rand::DblUniform(-3, 3.5));
+  //   newTarget.Y(ignition::math::Rand::DblUniform(-10, 2));
 
-    for (unsigned int i = 0; i < this->world->ModelCount(); ++i)
-    {
-      double dist = (this->world->ModelByIndex(i)->WorldPose().Pos()
-          - newTarget).Length();
-      if (dist < 2.0)
-      {
-        newTarget = this->target;
-        break;
-      }
-    }
+  //   for (unsigned int i = 0; i < this->world->ModelCount(); ++i)
+  //   {
+  //     double dist = (this->world->ModelByIndex(i)->WorldPose().Pos()
+  //         - newTarget).Length();
+  //     if (dist < 2.0)
+  //     {
+  //       newTarget = this->target;
+  //       break;
+  //     }
+  //   }
+  // }
+  // this->target = newTarget;
+
+  // Added by brucechanjianle
+  // Increase index number in sequence
+  if(this->idx < this->targets.size())
+  {
+    this->idx++;
   }
-  this->target = newTarget;
+  else
+  {
+    this->idx = 0;
+  }
+  
+  // Set next target
+  this->target = this->targets.at(this->idx);
+  
 }
 
 /////////////////////////////////////////////////
@@ -148,10 +180,12 @@ void AutoActorPlugin::OnUpdate(const common::UpdateInfo &_info)
   ignition::math::Vector3d rpy = pose.Rot().Euler();
 
   double distance = pos.Length();
+  
+  gzmsg << distance << std::endl;
 
   // Choose a new target position if the actor has reached its current
   // target.
-  if (distance < 0.3)
+  if (distance < 1.5)
   {
     this->ChooseNewTarget();
     pos = this->target - pose.Pos();
