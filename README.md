@@ -59,3 +59,17 @@ AUTONOMOUS ACTOR PLUGIN
 - **targets**: The <targets> element contains multiple <target> elements.
 - **target**: Add <target> element for actor to navigate to in sequence.
 - **target_tolerance**: Modify <target_tolerance> for invoking next target. Please note that the Gazebo simulator is not very accurate.
+
+
+## Models
+
+The models folder is obtained from 
+
+## More about Gazebo plugin
+
+![image](https://raw.githubusercontent.com/osrf/gazebo_tutorials/master/install_dependencies_from_source/files/gazebo_dependency_tree.svg)
+
+## Reference
+
+- Gazebo debug msg [link1](https://answers.gazebosim.org//question/17428/how-print-the-output-of-a-plugin/)
+- Gazebo dependencies [link1](http://gazebosim.org/tutorials?tut=install_dependencies_from_source)
