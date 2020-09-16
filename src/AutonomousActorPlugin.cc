@@ -59,6 +59,9 @@ void AutoActorPlugin::Load(physics::ModelPtr _model, sdf::ElementPtr _sdf)
       modelElem = modelElem->GetNextElement( "model");
     }
   }
+
+  // Added by brucechanjianle
+  // Read in multiple targets
 }
 
 /////////////////////////////////////////////////
