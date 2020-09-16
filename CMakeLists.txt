@@ -24,3 +24,8 @@ catkin_package(
 
 add_library(AutonomousActorPlugin SHARED src/AutonomousActorPlugin.cc)
 target_link_libraries(AutonomousActorPlugin ${caktin_LIBRARIES} ${GAZEBO_LIBRARIES})
+
+# Debug Version
+target_compile_definitions(AutonomousActorPluginDebug PRIVATE DEBUG_)
+add_library(AutonomousActorPluginDebug SHARED src/AutonomousActorPlugin.cc)
+target_link_libraries(AutonomousActorPluginDebug ${caktin_LIBRARIES} ${GAZEBO_LIBRARIES})
