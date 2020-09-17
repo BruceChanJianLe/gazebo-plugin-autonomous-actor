@@ -1,6 +1,7 @@
 # GAZEBO Plugin Autonomous Actor
 
 This repository is Gazebo plugin for actor to navigation in simulation environment autonomously.  
+Please refer for more usage of actor in Gazebo at this [repository](https://github.com/BruceChanJianLe/gazebo-actor)  
 
 ## Installation
 
