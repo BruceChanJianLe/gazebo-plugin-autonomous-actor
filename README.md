@@ -3,6 +3,8 @@
 This repository is Gazebo plugin for actor to navigation in simulation environment autonomously.  
 Please refer for more usage of actor in Gazebo at this [repository](https://github.com/BruceChanJianLe/gazebo-actor)  
 
+CURRENTLY, THIS PACKAGE IS STILL UNDER DEVELOPMENT. IT IS NOT YET FUNCTIONAL.
+
 ## Installation
 
 This code may be treated as a ROS package. Therefore, it can be built with `catkin_make` or `catkin build`.
