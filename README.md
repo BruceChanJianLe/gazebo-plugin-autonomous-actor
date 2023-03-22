@@ -5,6 +5,8 @@ Please refer for more usage of actor in Gazebo at this [repository](https://gith
 
 CURRENTLY, THIS PACKAGE IS STILL UNDER DEVELOPMENT. IT IS NOT YET FUNCTIONAL.
 
+Anyone who is interested can checkout this fork (https://github.com/bach05/gazebo-plugin-autonomous-actor).
+
 ## Installation
 
 This code may be treated as a ROS package. Therefore, it can be built with `catkin_make` or `catkin build`.
